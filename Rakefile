@@ -11,6 +11,9 @@ task :install => [:submodule_init, :submodules] do
   puts
 
   install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
+
+  allow_apps_for_sierra if RUBY_PLATFORM.downcase.include?("darwin")
+
   install_rvm_binstubs
 
   # this has all the runcoms from this directory.
@@ -117,6 +120,23 @@ private
 def run(cmd)
   puts "[Running] #{cmd}"
   `#{cmd}` unless ENV['DEBUG']
+end
+
+
+def allow_apps_for_sierra
+
+  puts
+  puts "======================================================"
+  puts "Allow Sierra to run apps from any source"
+  puts "======================================================"
+
+  os_version = (run %{ defaults read loginwindow SystemVersionStampAsString })
+
+  is_mac_os_sierra = os_version.include?("10.12")
+  
+  if os_version.include?("10.12")
+    run %{ sudo spctl --master-disable }
+  end
 end
 
 def install_rvm_binstubs
