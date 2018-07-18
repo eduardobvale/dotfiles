@@ -100,7 +100,6 @@ brew 'mongodb'
 brew 'mysql'
 brew 'opam'
 brew 'poppler', args: ['with-qt']
-brew 'python3'
 brew 'postgresql', restart_service: true
 brew 'qpdf'
 brew 'qt'
@@ -110,4 +109,4 @@ brew 'unoconv'
 brew 'unpaper'
 brew 'wget'
 brew 'yarn'
-brew 'python'
+brew 'pyenv'
